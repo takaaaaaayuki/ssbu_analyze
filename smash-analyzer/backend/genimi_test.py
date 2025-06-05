@@ -2,7 +2,7 @@ import os
 from google.generativeai import text
 
 # APIキーの設定 (環境変数から取得)
-os.environ["GOOGLE_API_KEY"] = "***REMOVED***" # 取得したAPIキーを設定
+os.environ["GOOGLE_API_KEY"] = "AIzaSyApp0YlnY3ZtBa1Ga_6vrB-IGVcucZYna4" # 取得したAPIキーを設定
 
 # テキスト生成モデルの初期化
 model = text.Model("models/gemini-pro")
