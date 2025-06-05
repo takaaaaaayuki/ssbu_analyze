@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="スマブラの試合分析をサポートするツール。キャラクター間の相性や状況に応じた戦略を提案します。">
+    <title>スマブラ分析ツール - 戦略的な試合運びをサポート</title>
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1 class="main-title">スマブラ分析ツール</h1>
+            <p class="subtitle">試合の状況を分析し、最適な戦略を提案します</p>
+        </header>
+        
+        <main>
+            <!-- 画像アップロードセクション -->
+            <section class="upload-section" aria-labelledby="upload-title">
+                <h2 id="upload-title" class="section-title">画面のアップロード</h2>
+                <div class="upload-area" id="uploadArea">
+                    <div class="upload-instructions">
+                        <p>ここに画像をドラッグ&ドロップ</p>
+                        <p>または</p>
+                        <label for="fileInput" class="upload-button">ファイルを選択</label>
+                        <input type="file" id="fileInput" accept="image/*" class="hidden-input">
+                    </div>
+                    <div id="preview" class="preview-area"></div>
+                </div>
+            </section>
+
+            <!-- パラメータ設定セクション -->
+            <section class="parameters-section" aria-labelledby="params-title">
+                <h2 id="params-title" class="section-title">試合パラメータ</h2>
+                <div class="parameters-grid">
+                    <!-- キャラクター選択グループ -->
+                    <div class="parameter-group">
+                        <h3 class="group-title">キャラクター選択</h3>
+                        <div class="character-selectors">
+                            <div class="form-group">
+                                <label for="playerCharacter">自キャラクター</label>
+                                <select id="playerCharacter" name="playerCharacter" required>
+                                    <option value="">選択してください</option>
+                                    <option value="mario">マリオ</option>
+                                    <option value="donkey">ドンキーコング</option>
+                                    <!-- 他のキャラクター -->
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="opponentCharacter">相手キャラクター</label>
+                                <select id="opponentCharacter" name="opponentCharacter" required>
+                                    <option value="">選択してください</option>
+                                    <option value="mario">マリオ</option>
+                                    <option value="donkey">ドンキーコング</option>
+                                    <!-- 他のキャラクター -->
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ダメージ設定グループ -->
+                    <div class="parameter-group">
+                        <h3 class="group-title">ダメージ状況</h3>
+                        <div class="damage-inputs">
+                            <div class="form-group">
+                                <label for="playerDamage">自分のダメージ%</label>
+                                <input type="number" id="playerDamage" name="playerDamage" 
+                                       min="0" max="999" required
+                                       aria-describedby="playerDamageHint">
+                                <small id="playerDamageHint" class="input-hint">0〜999の値を入力</small>
+                            </div>
+                            <div class="form-group">
+                                <label for="opponentDamage">相手のダメージ%</label>
+                                <input type="number" id="opponentDamage" name="opponentDamage" 
+                                       min="0" max="999" required
+                                       aria-describedby="opponentDamageHint">
+                                <small id="opponentDamageHint" class="input-hint">0〜999の値を入力</small>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- ガード設定グループ -->
+                    <div class="parameter-group">
+                        <h3 class="group-title">ガード状態</h3>
+                        <div class="form-group">
+                            <label for="guardDurability">ガード耐久値</label>
+                            <input type="number" id="guardDurability" name="guardDurability" 
+                                   min="0" max="100" required
+                                   aria-describedby="guardDurabilityHint">
+                            <small id="guardDurabilityHint" class="input-hint">0〜100の値を入力</small>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 分析結果セクション -->
+            <section class="results-section" aria-labelledby="results-title">
+                <h2 id="results-title" class="section-title">分析結果</h2>
+                <div class="results-grid">
+                    <div class="result-card position-result">
+                        <h3>位置関係分析</h3>
+                        <p id="positionResult">-</p>
+                    </div>
+                    <div class="result-card action-result">
+                        <h3>推奨アクション</h3>
+                        <p id="actionResult">-</p>
+                    </div>
+                    <div class="result-card guard-result">
+                        <h3>ガーキャン可能技</h3>
+                        <p id="guardResult">-</p>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <footer class="footer">
+            <small>&copy; 2024 スマブラ分析ツール</small>
+        </footer>
+    </div>
+
+    <script src="js/utils.js"></script>
+    <script src="js/analyzer.js"></script>
+    <script src="js/main.js"></script>
+</body>
+</html>

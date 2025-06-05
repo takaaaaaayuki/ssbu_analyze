@@ -1,0 +1,12 @@
+steps:
+  # Docker イメージのビルド
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['build', '-t', 'gcr.io/smash-analyzer-20240209/smash-analyzer', '.']
+  
+  # ビルドしたイメージをContainer Registryにプッシュ
+  - name: 'gcr.io/cloud-builders/docker'
+    args: ['push', 'gcr.io/smash-analyzer-20240209/smash-analyzer']
+
+# 最終的なイメージをContainer Registryに保存
+images:
+  - 'gcr.io/smash-analyzer-20240209/smash-analyzer'

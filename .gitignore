@@ -1,0 +1,11 @@
+.DS_Store
+*.db
+*.pyc
+*.ipynb
+*.jpg
+*.jpeg
+*.png
+*.json
+__pycache__/
+.env
+o/
