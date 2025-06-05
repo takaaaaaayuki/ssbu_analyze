@@ -1,94 +1,105 @@
-# 🎮 SSBU Analyze - 大乱闘スマッシュブラザーズ分析ツール
+# 🎮 SSBU Analyze - 大乱闘スマッシュブラザーズ SPECIAL最適化行動システム
 
-**SSBU Analyze** は、大乱闘スマッシュブラザーズ（Smash Bros. Ultimate）のプレイデータや画像を解析し、プレイヤー行動の可視化や最適なアクション提案を行う分析支援アプリです。
-
----
-
-## 🔍 主な機能
-
-- 📸 撮影画像のアップロードからプレイ内容を解析
-- 📊 キャラクターの行動パターンの可視化
-- 🤖 AIによる次の最適行動レコメンド
-- 📁 分類済データからキャラ別の傾向分析
-- 🧠 GeminiやVision APIとの連携（予定）
+[▶️ YouTube Demo](https://youtu.be/V89e8IKk7L8)  
+[🌐 Web App Link](https://smash-analyzer-dtbx5ymvvq-an.a.run.app/)
 
 ---
 
-## 🧰 使用技術
+## 🔍 概要
+
+**SSBU Analyze** は、「大乱闘スマッシュブラザーズ SPECIAL」における戦略性の高さ・技術習得の難しさを、AIと画像処理によってサポートする分析支援システムです。  
+プレイヤーの現在状況に応じて、最適な立ち回りや技選択を自動提案します。
+
+---
+
+## 📐 システム構成図
+
+![図](/mnt/data/スクリーンショット 2025-06-05 23.05.22.png)
+
+---
+
+## 📸 画像処理結果例（グリッド分割 × 座標解析）
+
+画像をマス目に分割し、プレイヤー・相手キャラの位置を数値化、距離を算出します。
+
+![図](/mnt/data/スクリーンショット 2025-06-05 23.05.38.png)
+
+---
+
+## 🤖 Gemini AIによる行動提案の出力結果例
+
+現在の状況や座標・ダメージ・距離に応じて、Gemini AIが次の行動を論理的に説明します。
+
+![図](/mnt/data/スクリーンショット 2025-06-05 23.06.15.png)
+
+---
+
+## 🧠 システムの特徴と実装
+
+### 🔸 目的
+
+- ゲーム上達の効率化
+- AIによる立ち回り提案
+- 画像を用いた戦況の数値化・分析
+
+---
+
+### 🔸 主な機能
+
+- マス目単位でのグリッド分割
+- キャラクターのクリック検出 → 座標化
+- 相対距離の自動計算
+- キャラごとの技射程・特性データベース
+- Gemini APIを活用した行動提案
+- AIによる「ジャンプ or 回避 or 攻撃」の推奨判断
+
+---
+
+### 🔸 使用技術
 
 - Python（Flask / FastAPI）
 - OpenCV / PIL
-- SQLite（簡易DB）
-- HTML / CSS / JavaScript
-- Google Cloud Vision API（予定 or 実装済）
-- Git / GitHub
+- SQLite3
+- Google Gemini API（プロンプト最適化）
+- HTML / JavaScript / CSS
 
 ---
 
-## 📁 ディレクトリ構成
+## 🗂️ ディレクトリ構成（抜粋）
 
 ```
 
 ssbu\_analyze/
-├── cloud-run/               # デプロイ用の構成（Dockerfileなど）
-├── smash-analyzer/          # 分析ロジック・UI
-│   ├── backend/             # Pythonスクリプト群
-│   ├── css/                 # スタイリング
-│   ├── js/                  # フロントJS
-│   └── index.html           # UI画面
-├── .gitignore
-├── README.md
-└── requirements.txt
+├── smash-analyzer/           # Web UIとJS、静的ファイル
+│   ├── backend/              # Flaskアプリ・画像処理ロジック
+│   ├── css/                  # スタイル
+│   └── js/                   # ユーザー操作 & 座標送信
+├── cloud-run/                # Cloud Run 用 Dockerfile 等
+├── smash\_characters.db       # キャラクター技データベース
+└── README.md
 
-````
-
----
-
-## 🚀 セットアップ方法
-
-1. リポジトリをクローン
-
-```bash
-git clone https://github.com/takaaaaaayuki/ssbu_analyze.git
-cd ssbu_analyze
-````
-
-2. 仮想環境の作成（任意）
-
-```bash
-python -m venv venv
-source venv/bin/activate
-```
-
-3. 必要パッケージをインストール
-
-```bash
-pip install -r requirements.txt
-```
-
-4. アプリを起動
-
-```bash
-python app.py
-# または
-uvicorn app:app --reload
 ```
 
 ---
 
-## 🧪 今後の予定
+## 🔬 分析モデル詳細
 
-* Gemini APIを使った行動提案機能の拡張
-* プレイヤー別の分析結果保存＆比較
-* データアップロードによるモデル学習強化
-* Web UI の改善（Tailwind CSS適用予定）
-
----
-
-## 👨‍💻 開発・保守
-
-* 開発者：[@takaaaaaayuki](https://github.com/takaaaaaayuki)
+- グリッドは**横33×縦16分割**
+- 画像クリックでマリオ＆リンクの座標を取得
+- 距離算出とキャラの蓄積ダメージに基づき、有利不利を分類
+- Gemini APIがプロンプトを生成・チャット出力
 
 ---
 
+## 🎯 今後の展望
 
+- キャラ追加（87体全員対応）
+- ステージごとの最適化
+- リアルタイム戦闘支援（動画分析）
+- コミュニティとの連携によるAI改善
+
+---
+
+## 👤 開発担当 
+- 開発・設計・フロント・AI設計すべて担当  
+- Contact: [GitHub Profile](https://github.com/takaaaaaayuki)
